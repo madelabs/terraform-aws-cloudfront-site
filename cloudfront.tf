@@ -67,10 +67,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     acm_certificate_arn            = var.acm_certificate_arn
   }
 
-  logging_config {
-    bucket = aws_s3_bucket.cloudfront_logging.bucket_domain_name
-    prefix = local.s3_origin_id
-  }
+  #   logging_config {
+  #     bucket = aws_s3_bucket.cloudfront_logging.bucket_domain_name
+  #     prefix = local.s3_origin_id
+  #   }
 
   tags = {
     Terraformed = "true"

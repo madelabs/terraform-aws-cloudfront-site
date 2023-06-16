@@ -25,12 +25,12 @@ resource "aws_s3_bucket_policy" "east_bucket_read_policy" {
   policy = data.aws_iam_policy_document.east_bucket_policy.json
 }
 
-resource "aws_s3_bucket" "cloudfront_logging" {
-  bucket        = "e1-cloudfront-${var.project_name}-logging"
-  force_destroy = var.force_destroy
-}
+# resource "aws_s3_bucket" "cloudfront_logging" {
+#   bucket        = "e1-cloudfront-${var.project_name}-logging"
+#   force_destroy = var.force_destroy
+# }
 
-resource "aws_s3_bucket_acl" "cloudfront_logging_bucket_acl" {
-  bucket = aws_s3_bucket.cloudfront_logging.id
-  acl    = "log-delivery-write"
-}
+# resource "aws_s3_bucket_acl" "cloudfront_logging_bucket_acl" {
+#   bucket = aws_s3_bucket.cloudfront_logging.id
+#   acl    = "log-delivery-write"
+# }
