@@ -6,7 +6,7 @@ A Terraform module for managing a S3 hosted web application that is behind Cloud
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws.deploy"></a> [aws.deploy](#provider\_aws.deploy) | ~> 5.0.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0.0 |
 
 ## Modules
 
@@ -24,7 +24,6 @@ No modules.
 | [aws_s3_bucket_policy.east_bucket_read_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_wafv2_ip_set.allowed_ipset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_ip_set) | resource |
 | [aws_wafv2_web_acl.allow_specific_ips_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl) | resource |
-| [aws_caller_identity.deploy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.east_bucket_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
