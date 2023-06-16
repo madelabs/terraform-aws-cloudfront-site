@@ -47,7 +47,7 @@ variable "max_ttl" {
 
 variable "domain_alias" {
   type        = string
-  description = "The domain alias to apply to your distribution. Example: devconnectenterprise.kehe.com"
+  description = "The domain alias to apply to your distribution. Example: mydomain.domain.com"
 }
 
 variable "acm_certificate_arn" {
