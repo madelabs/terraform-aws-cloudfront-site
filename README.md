@@ -1,5 +1,17 @@
 # terraform-aws-cloudfront-site
+
+<!-- BEGIN MadeLabs Header -->
+![MadeLabs is for hire!](https://d2xqy67kmqxrk1.cloudfront.net/horizontal_logo_white.png)
+MadeLabs is proud to support the open source community with these blueprints for provisioning infrastructure to help software builders get started quickly and with confidence. 
+
+We're also for hire: [https://www.madelabs.io](https://www.madelabs.io)
+<!-- END MadeLabs Header -->
+
 A Terraform module for managing a S3 hosted web application that is behind CloudFront CDN.
+
+## Requirements
+
+- ACM Certificate ARN
 
 <!-- BEGIN_TF_DOCS -->
 ## Providers
