@@ -2,13 +2,10 @@ locals {
   s3_origin_id = "${var.project_name}-primarys3Origin"
 }
 
-resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  provider = aws.deploy
-}
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {}
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
-  provider = aws.deploy
-  aliases  = ["${var.domain_alias}"]
+  aliases = ["${var.domain_alias}"]
 
   origin {
     domain_name = aws_s3_bucket.east_website_bucket.bucket_regional_domain_name

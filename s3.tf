@@ -1,8 +1,6 @@
 resource "aws_s3_bucket" "east_website_bucket" {
   bucket        = "e1-${var.project_name}"
   force_destroy = var.force_destroy
-  provider      = aws.deploy
-
 
   tags = {
     project = var.project_name
@@ -10,7 +8,6 @@ resource "aws_s3_bucket" "east_website_bucket" {
 }
 
 data "aws_iam_policy_document" "east_bucket_policy" {
-  provider = aws.deploy
 
   statement {
     actions   = ["s3:GetObject"]
@@ -24,19 +21,16 @@ data "aws_iam_policy_document" "east_bucket_policy" {
 }
 
 resource "aws_s3_bucket_policy" "east_bucket_read_policy" {
-  bucket   = aws_s3_bucket.east_website_bucket.id
-  policy   = data.aws_iam_policy_document.east_bucket_policy.json
-  provider = aws.deploy
+  bucket = aws_s3_bucket.east_website_bucket.id
+  policy = data.aws_iam_policy_document.east_bucket_policy.json
 }
 
 resource "aws_s3_bucket" "cloudfront_logging" {
   bucket        = "e1-cloudfront-${var.project_name}-logging"
   force_destroy = var.force_destroy
-  provider      = aws.deploy
 }
 
 resource "aws_s3_bucket_acl" "cloudfront_logging_bucket_acl" {
-  bucket   = aws_s3_bucket.cloudfront_logging.id
-  acl      = "log-delivery-write"
-  provider = aws.deploy
+  bucket = aws_s3_bucket.cloudfront_logging.id
+  acl    = "log-delivery-write"
 }

@@ -1,5 +1,4 @@
 resource "aws_wafv2_ip_set" "allowed_ipset" {
-  provider           = aws.deploy
   count              = var.create_waf ? 1 : 0
   name               = "${var.project_name}-allowed-ipset"
   scope              = "CLOUDFRONT"
@@ -9,10 +8,9 @@ resource "aws_wafv2_ip_set" "allowed_ipset" {
 }
 
 resource "aws_wafv2_web_acl" "allow_specific_ips_acl" {
-  provider = aws.deploy
-  count    = var.create_waf ? 1 : 0
-  name     = "${var.project_name}-acl"
-  scope    = "CLOUDFRONT"
+  count = var.create_waf ? 1 : 0
+  name  = "${var.project_name}-acl"
+  scope = "CLOUDFRONT"
 
   default_action {
     block {}
