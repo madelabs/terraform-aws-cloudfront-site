@@ -183,13 +183,13 @@ variable "geo_restriction_locations" {
 
 variable "origin_shield_enabled" {
   type        = bool
-  description = "(optional) describe your variable"
+  description = "Whether Origin Shield is enabled."
   default     = false
 }
 
 variable "origin_shield_region" {
   type        = string
-  description = "(optional) describe your variable"
+  description = "AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2."
   default     = "us-east-1"
 }
 
