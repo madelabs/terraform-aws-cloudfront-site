@@ -1,5 +1,5 @@
-resource "aws_s3_bucket" "east_website_bucket" {
-  bucket        = "e1-${var.project_name}"
+resource "aws_s3_bucket" "website_bucket" {
+  bucket        = var.project_name
   force_destroy = var.force_destroy
 
   tags = {
@@ -7,11 +7,11 @@ resource "aws_s3_bucket" "east_website_bucket" {
   }
 }
 
-data "aws_iam_policy_document" "east_bucket_policy" {
+data "aws_iam_policy_document" "bucket_policy" {
 
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["${aws_s3_bucket.east_website_bucket.arn}/*"]
+    resources = ["${aws_s3_bucket.website_bucket.arn}/*"]
 
     principals {
       type        = "AWS"
@@ -20,17 +20,26 @@ data "aws_iam_policy_document" "east_bucket_policy" {
   }
 }
 
-resource "aws_s3_bucket_policy" "east_bucket_read_policy" {
-  bucket = aws_s3_bucket.east_website_bucket.id
-  policy = data.aws_iam_policy_document.east_bucket_policy.json
+resource "aws_s3_bucket_policy" "bucket_read_policy" {
+  bucket = aws_s3_bucket.website_bucket.id
+  policy = data.aws_iam_policy_document.bucket_policy.json
 }
 
-# resource "aws_s3_bucket" "cloudfront_logging" {
-#   bucket        = "e1-cloudfront-${var.project_name}-logging"
-#   force_destroy = var.force_destroy
-# }
+resource "aws_s3_bucket" "cloudfront_logging" {
+  bucket        = "${var.project_name}-cloudfront-logging"
+  force_destroy = var.force_destroy
+}
 
-# resource "aws_s3_bucket_acl" "cloudfront_logging_bucket_acl" {
-#   bucket = aws_s3_bucket.cloudfront_logging.id
-#   acl    = "log-delivery-write"
-# }
+resource "aws_s3_bucket_acl" "cloudfront_logging_bucket_acl" {
+  bucket = aws_s3_bucket.cloudfront_logging.id
+  acl    = "log-delivery-write"
+}
+
+
+resource "aws_s3_bucket_ownership_controls" "logging_ownership" {
+  bucket = aws_s3_bucket.cloudfront_logging.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
