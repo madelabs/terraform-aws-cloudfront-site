@@ -66,8 +66,8 @@ No modules.
 | <a name="input_geo_restriction_locations"></a> [geo\_restriction\_locations](#input\_geo\_restriction\_locations) | The ISO 3166-1-alpha-2 codes for which you want CloudFront to not distribute your content (blacklist) | `list(string)` | <pre>[<br>  "RU",<br>  "KP",<br>  "IR"<br>]</pre> | no |
 | <a name="input_geo_restriction_type"></a> [geo\_restriction\_type](#input\_geo\_restriction\_type) | Method that you want to use to restrict distribution of your content by country: none, whitelist, or blacklist. | `string` | `"blacklist"` | no |
 | <a name="input_index_document"></a> [index\_document](#input\_index\_document) | The default file that CloudFront will look for. | `string` | `"index.html"` | no |
-| <a name="input_origin_shield_enabled"></a> [origin\_shield\_enabled](#input\_origin\_shield\_enabled) | (optional) describe your variable | `bool` | `false` | no |
-| <a name="input_origin_shield_region"></a> [origin\_shield\_region](#input\_origin\_shield\_region) | (optional) describe your variable | `string` | `"us-east-1"` | no |
+| <a name="input_origin_shield_enabled"></a> [origin\_shield\_enabled](#input\_origin\_shield\_enabled) | Whether Origin Shield is enabled. | `bool` | `false` | no |
+| <a name="input_origin_shield_region"></a> [origin\_shield\_region](#input\_origin\_shield\_region) | AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. | `string` | `"us-east-1"` | no |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. One of PriceClass\_All, PriceClass\_200, PriceClass\_100. | `string` | `"PriceClass_100"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name. | `string` | n/a | yes |
 | <a name="input_ssl_protocol_version"></a> [ssl\_protocol\_version](#input\_ssl\_protocol\_version) | Minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
