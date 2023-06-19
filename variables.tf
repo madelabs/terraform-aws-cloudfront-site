@@ -11,8 +11,8 @@ variable "project_name" {
 
 variable "force_destroy" {
   type        = bool
-  default     = true
   description = "A boolean that indicates all objects (including any locked objects) should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
+  default     = true
 }
 
 variable "price_class" {
@@ -179,4 +179,31 @@ variable "geo_restriction_locations" {
     condition     = alltrue([for loc in var.geo_restriction_locations : can(regex("^[A-Z]{2}$", loc))])
     error_message = "Each element of geo_restriction_locations must be an ISO 3166-1-alpha-2 code. Lookup codes here https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"
   }
+}
+
+variable "origin_shield_enabled" {
+  type        = bool
+  description = "(optional) describe your variable"
+  default     = false
+}
+
+variable "origin_shield_region" {
+  type        = string
+  description = "(optional) describe your variable"
+  default     = "us-east-1"
+}
+
+variable "custom_error_response" {
+  type = list(object({
+    error_code               = number
+    error_response_code      = optional(number)
+    error_response_page_path = optional(string)
+    error_caching_min_ttl    = optional(string)
+  }))
+  default = [{
+    error_code               = 403
+    error_response_code      = 403
+    error_response_page_path = "/index.html"
+  }]
+  description = "Custom Error Response Arguments"
 }

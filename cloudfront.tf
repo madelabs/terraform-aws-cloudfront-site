@@ -1,5 +1,5 @@
 locals {
-  s3_origin_id = "${var.project_name}-primarys3-origin"
+  s3_origin_id = "${var.project_name}-primary-s3-origin"
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {}
@@ -12,8 +12,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     origin_id   = local.s3_origin_id
 
     origin_shield {
-      enabled              = true
-      origin_shield_region = "us-east-1"
+      enabled              = var.origin_shield_enabled
+      origin_shield_region = var.origin_shield_region
     }
 
     s3_origin_config {
@@ -43,12 +43,15 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
-  custom_error_response {
-    error_code         = 403
-    response_page_path = "/index.html"
-    response_code      = 403
+  dynamic "custom_error_response" {
+    for_each = var.custom_error_response
+    content {
+      error_code            = custom_error_response.value.error_code
+      response_page_path    = custom_error_response.value.error_response_page_path
+      response_code         = custom_error_response.value.error_response_code
+      error_caching_min_ttl = custom_error_response.value.error_caching_min_ttl
+    }
   }
-
 
   price_class = var.price_class
   web_acl_id  = (var.create_waf && var.apply_waf_cdn) ? aws_wafv2_web_acl.allow_specific_ips_acl[0].arn : null
@@ -63,7 +66,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     minimum_protocol_version       = var.ssl_protocol_version
     ssl_support_method             = var.ssl_support_method
-    cloudfront_default_certificate = true
+    cloudfront_default_certificate = var.cloudfront_default_certificate
     acm_certificate_arn            = var.acm_certificate_arn
   }
 
