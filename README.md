@@ -9,6 +9,8 @@ We're also for hire: [https://www.madelabs.io](https://www.madelabs.io)
 
 A Terraform module for managing a S3 hosted web application that is behind CloudFront CDN.
 
+![PlantUML model](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/madelabs/terraform-aws-cloudfront-site/main/docs/terraform-aws-cloudfront-site.puml)
+
 ## Requirements
 
 - ACM Certificate ARN
