@@ -1,0 +1,35 @@
+@startuml terraform-aws-ecs-app
+
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v15.0/dist
+!include AWSPuml/AWSCommon.puml
+!include AWSPuml/AWSSimplified.puml
+!include AWSPuml/Groups/AWSCloud.puml
+!include AWSPuml/NetworkingContentDelivery/all.puml
+!include AWSPuml/Groups/all.puml
+!include AWSPuml/Storage/all.puml
+!include AWSPuml/ManagementGovernance/all.puml
+!include AWSPuml/SecurityIdentityCompliance/all.puml
+
+left to right direction
+
+AWSCloudGroup(cloud)  {
+    GenericGroup(fw, "\tAWS WAF\t")  {
+        NetworkFirewall(waf, "WAF \n (Optional)", "") #LightGreen
+    }
+
+    RegionGroup(region, "Region") {
+        GenericGroup(s3, "\tAWS S3\t")  {
+            SimpleStorageServiceBucket(web, "Website", "") #LightGreen
+            SimpleStorageServiceBucket(logs, "Logs", "") #LightGreen
+        }
+        GenericGroup(cf, "\tAWS Cloudfront\t")  {
+            CloudFront(dist, "Distribution", "") #LightGreen
+        }
+    }  
+    
+    waf --> dist : Optional IP Whitelist
+    dist --> web  
+    dist --> logs
+}
+
+@enduml
