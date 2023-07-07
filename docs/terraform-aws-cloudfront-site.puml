@@ -17,13 +17,14 @@ AWSCloudGroup(cloud)  {
         NetworkFirewall(waf, "WAF \n (Optional)", "") #LightGreen
     }
 
+    GenericGroup(cf, "\tAWS Cloudfront\t")  {
+            CloudFront(dist, "Distribution", "") #LightGreen
+    }
+
     RegionGroup(region, "Region") {
         GenericGroup(s3, "\tAWS S3\t")  {
             SimpleStorageServiceBucket(web, "Website", "") #LightGreen
             SimpleStorageServiceBucket(logs, "Logs", "") #LightGreen
-        }
-        GenericGroup(cf, "\tAWS Cloudfront\t")  {
-            CloudFront(dist, "Distribution", "") #LightGreen
         }
     }  
     
