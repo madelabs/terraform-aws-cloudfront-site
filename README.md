@@ -6,6 +6,7 @@ MadeLabs is proud to support the open source community with these blueprints for
 
 We're also for hire: [https://www.madelabs.io](https://www.madelabs.io)
 <!-- END MadeLabs Header -->
+---
 
 A Terraform module for managing a S3 hosted web application that is behind CloudFront CDN.
 
