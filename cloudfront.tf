@@ -11,9 +11,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
     origin_id   = local.s3_origin_id
 
-    origin_shield {
-      enabled              = var.origin_shield_enabled
-      origin_shield_region = var.origin_shield_region
+    dynamic "origin_shield" {
+      for_each = var.origin_shield_enabled ? [1] : []
+      content {
+        enabled              = true
+        origin_shield_region = var.origin_shield_region
+      }
     }
 
     s3_origin_config {
