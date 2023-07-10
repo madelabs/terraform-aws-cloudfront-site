@@ -21,7 +21,7 @@ A Terraform module for managing a S3 hosted web application that is behind Cloud
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.5.0 |
 
 ## Modules
 
