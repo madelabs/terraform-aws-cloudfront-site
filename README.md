@@ -6,8 +6,11 @@ MadeLabs is proud to support the open source community with these blueprints for
 
 We're also for hire: [https://www.madelabs.io](https://www.madelabs.io)
 <!-- END MadeLabs Header -->
+---
 
 A Terraform module for managing a S3 hosted web application that is behind CloudFront CDN.
+
+![PlantUML model](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/madelabs/terraform-aws-cloudfront-site/main/docs/terraform-aws-cloudfront-site.puml)
 
 ## Requirements
 
@@ -18,7 +21,7 @@ A Terraform module for managing a S3 hosted web application that is behind Cloud
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.5.0 |
 
 ## Modules
 
@@ -56,7 +59,7 @@ No modules.
 | <a name="input_cache_behavior_max_ttl"></a> [cache\_behavior\_max\_ttl](#input\_cache\_behavior\_max\_ttl) | The maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. | `number` | `120` | no |
 | <a name="input_cache_behavior_min_ttl"></a> [cache\_behavior\_min\_ttl](#input\_cache\_behavior\_min\_ttl) | The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. Defaults to 0 seconds | `number` | `0` | no |
 | <a name="input_cache_behavior_viewer_protocol_policy"></a> [cache\_behavior\_viewer\_protocol\_policy](#input\_cache\_behavior\_viewer\_protocol\_policy) | Use this element to specify the protocol that users can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. One of allow-all, https-only, or redirect-to-https. | `string` | `"redirect-to-https"` | no |
-| <a name="input_cloudfront_default_certificate"></a> [cloudfront\_default\_certificate](#input\_cloudfront\_default\_certificate) | Whether or not to use the default CloudFront certificate. If false, you must specify the acm\_certificate\_arn. | `bool` | `true` | no |
+| <a name="input_cloudfront_default_certificate"></a> [cloudfront\_default\_certificate](#input\_cloudfront\_default\_certificate) | Whether or not to use the default CloudFront certificate. If false, you must specify the acm\_certificate\_arn. | `bool` | `false` | no |
 | <a name="input_cloudfront_is_enabled"></a> [cloudfront\_is\_enabled](#input\_cloudfront\_is\_enabled) | Whether or not to enable the CloudFront distribution. | `bool` | `true` | no |
 | <a name="input_cloudfront_is_ipv6_enabled"></a> [cloudfront\_is\_ipv6\_enabled](#input\_cloudfront\_is\_ipv6\_enabled) | Whether or not to enable IPv6 for the CloudFront distribution. | `bool` | `true` | no |
 | <a name="input_create_waf"></a> [create\_waf](#input\_create\_waf) | Enable or disable the creation of WAFv2 Web ACL resources. | `bool` | `false` | no |
@@ -67,7 +70,7 @@ No modules.
 | <a name="input_geo_restriction_type"></a> [geo\_restriction\_type](#input\_geo\_restriction\_type) | Method that you want to use to restrict distribution of your content by country: none, whitelist, or blacklist. | `string` | `"blacklist"` | no |
 | <a name="input_index_document"></a> [index\_document](#input\_index\_document) | The default file that CloudFront will look for. | `string` | `"index.html"` | no |
 | <a name="input_origin_shield_enabled"></a> [origin\_shield\_enabled](#input\_origin\_shield\_enabled) | Whether Origin Shield is enabled. | `bool` | `false` | no |
-| <a name="input_origin_shield_region"></a> [origin\_shield\_region](#input\_origin\_shield\_region) | AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. | `string` | `"us-east-1"` | no |
+| <a name="input_origin_shield_region"></a> [origin\_shield\_region](#input\_origin\_shield\_region) | AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. Based on https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region | `string` | `"us-east-1"` | no |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. One of PriceClass\_All, PriceClass\_200, PriceClass\_100. | `string` | `"PriceClass_100"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name. | `string` | n/a | yes |
 | <a name="input_ssl_protocol_version"></a> [ssl\_protocol\_version](#input\_ssl\_protocol\_version) | Minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |

@@ -39,7 +39,7 @@ variable "acm_certificate_arn" {
 variable "cloudfront_default_certificate" {
   type        = bool
   description = "Whether or not to use the default CloudFront certificate. If false, you must specify the acm_certificate_arn."
-  default     = true
+  default     = false
 }
 
 variable "ssl_protocol_version" {
@@ -189,8 +189,13 @@ variable "origin_shield_enabled" {
 
 variable "origin_shield_region" {
   type        = string
-  description = "AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2."
+  description = "AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. Based on https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region"
   default     = "us-east-1"
+
+  validation {
+    condition     = can(regex("^(us-east-2|us-east-1|us-west-2|ap-south-1|ap-northeast-2|ap-southeast-1|ap-southeast-2|ap-northeast-1|eu-central-1|eu-west-1|eu-west-2|sa-east-1)$", var.origin_shield_region))
+    error_message = "origin_shield_region must be one of us-east-2, us-east-1, us-west-2, ap-south-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, eu-central-1, eu-west-1, eu-west-2, sa-east-1"
+  }
 }
 
 variable "custom_error_response" {
