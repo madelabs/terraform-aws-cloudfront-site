@@ -3,7 +3,7 @@ run-name: generate terraform-docs ${{ github.event.pull_request.title }}
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-
+permissions: write-all
 jobs:
   generate-terraform-docs:
     runs-on: ubuntu-latest
