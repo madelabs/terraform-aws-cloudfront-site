@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2023-10-16
+
+- Add support for security response headers. 
+
 ## [0.0.2] - 2023-06-29
 
 ### Added
