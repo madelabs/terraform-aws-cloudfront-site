@@ -212,3 +212,21 @@ variable "custom_error_response" {
   }]
   description = "Custom Error Response Arguments"
 }
+
+variable "security_headers" {
+  type = object({
+    content_type_options      = optional(map(any))
+    frame_options             = optional(map(any))
+    referrer_policy           = optional(map(any))
+    xss_protection            = optional(map(any))
+    strict_transport_security = optional(map(any))
+    content_security_policy   = optional(map(any))
+  })
+  default = {}
+}
+
+variable "attach_response_headers_policy" {
+  type        = bool
+  description = "Whether or not to create a response headers policy."
+  default     = false
+}
