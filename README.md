@@ -21,7 +21,7 @@ A Terraform module for managing a S3 hosted web application that is behind Cloud
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.5.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.11.0 |
 
 ## Modules
 
@@ -33,6 +33,7 @@ No modules.
 |------|------|
 | [aws_cloudfront_distribution.s3_distribution](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) | resource |
 | [aws_cloudfront_origin_access_identity.origin_access_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_origin_access_identity) | resource |
+| [aws_cloudfront_response_headers_policy.policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_response_headers_policy) | resource |
 | [aws_s3_bucket.cloudfront_logging](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.website_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_acl.cloudfront_logging_bucket_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
@@ -51,6 +52,7 @@ No modules.
 | <a name="input_allowed_traffic_cloudwatch_metrics_enabled"></a> [allowed\_traffic\_cloudwatch\_metrics\_enabled](#input\_allowed\_traffic\_cloudwatch\_metrics\_enabled) | Whether or not to enable the metrics for the allowed traffic rule. | `bool` | `true` | no |
 | <a name="input_allowed_traffic_sampled_requests_enabled"></a> [allowed\_traffic\_sampled\_requests\_enabled](#input\_allowed\_traffic\_sampled\_requests\_enabled) | Whether or not to enable the sampled requests (3hr) for the allowed traffic rule. | `bool` | `true` | no |
 | <a name="input_apply_waf_cdn"></a> [apply\_waf\_cdn](#input\_apply\_waf\_cdn) | Wether or not to enable the restriction of IP addresses. | `bool` | `false` | no |
+| <a name="input_attach_response_headers_policy"></a> [attach\_response\_headers\_policy](#input\_attach\_response\_headers\_policy) | Whether or not to create a response headers policy. | `bool` | `false` | no |
 | <a name="input_blocked_traffic_cloudwatch_metrics_enabled"></a> [blocked\_traffic\_cloudwatch\_metrics\_enabled](#input\_blocked\_traffic\_cloudwatch\_metrics\_enabled) | Whether or not to enable the metrics for the blocked traffic rule. | `bool` | `true` | no |
 | <a name="input_blocked_traffic_sampled_requests_enabled"></a> [blocked\_traffic\_sampled\_requests\_enabled](#input\_blocked\_traffic\_sampled\_requests\_enabled) | Whether or not to enable the sampled requests (3hr) for the blocked traffic rule. | `bool` | `true` | no |
 | <a name="input_cache_behavior_allowed_methods"></a> [cache\_behavior\_allowed\_methods](#input\_cache\_behavior\_allowed\_methods) | Controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. | `list(string)` | <pre>[<br>  "GET",<br>  "HEAD",<br>  "OPTIONS"<br>]</pre> | no |
@@ -73,6 +75,7 @@ No modules.
 | <a name="input_origin_shield_region"></a> [origin\_shield\_region](#input\_origin\_shield\_region) | AWS Region for Origin Shield. To specify a region, use the region code, not the region name. For example, specify the US East (Ohio) region as us-east-2. Based on https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region | `string` | `"us-east-1"` | no |
 | <a name="input_price_class"></a> [price\_class](#input\_price\_class) | The price class for this distribution. One of PriceClass\_All, PriceClass\_200, PriceClass\_100. | `string` | `"PriceClass_100"` | no |
 | <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The project name. | `string` | n/a | yes |
+| <a name="input_security_headers"></a> [security\_headers](#input\_security\_headers) | n/a | <pre>object({<br>    content_type_options      = optional(map(any))<br>    frame_options             = optional(map(any))<br>    referrer_policy           = optional(map(any))<br>    xss_protection            = optional(map(any))<br>    strict_transport_security = optional(map(any))<br>    content_security_policy   = optional(map(any))<br>  })</pre> | `{}` | no |
 | <a name="input_ssl_protocol_version"></a> [ssl\_protocol\_version](#input\_ssl\_protocol\_version) | Minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. | `string` | `"TLSv1.2_2021"` | no |
 | <a name="input_ssl_support_method"></a> [ssl\_support\_method](#input\_ssl\_support\_method) | How you want CloudFront to serve HTTPS requests. One of vip or sni-only. | `string` | `"sni-only"` | no |
 
